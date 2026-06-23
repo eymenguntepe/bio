@@ -1,0 +1,1 @@
+My name is Eymen Güntepe. I am an 11th-grade student at Şehit Öğretmen Necmeddin Kuyucu Anadolu High School. I have a great interest in technology, software, and digital design. I am working to improve myself in these areas and create successful projects for the future. I am accelerating my steps in the world of technology by learning web development and platforms like GitHub.
