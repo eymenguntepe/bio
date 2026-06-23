@@ -1,837 +1,124 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Eymen Güntepe</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --navy: #0a0f1e;
-      --navy-mid: #111827;
-      --navy-light: #1a2540;
-      --gold: #f5c842;
-      --gold-dim: #c9a52e;
-      --white: #f0f4ff;
-      --muted: #8892a4;
-      --glass: rgba(255,255,255,0.05);
-      --glass-border: rgba(245,200,66,0.15);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--navy);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-
-    /* ── STARS BACKGROUND ── */
-    #stars-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 3rem;
-      background: rgba(10,15,30,0.7);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--glass-border);
-    }
-
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 0.05em;
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover { color: var(--gold); }
-
-    #music-btn {
-      background: none;
-      border: 1px solid var(--glass-border);
-      color: var(--gold);
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      font-family: 'Inter', sans-serif;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    #music-btn:hover { background: var(--glass); }
-
-    /* ── HERO ── */
-    #hero {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 6rem 2rem 4rem;
-    }
-
-    .hero-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.3s forwards;
-    }
-
-    .hero-name {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3.5rem, 10vw, 8rem);
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      color: var(--white);
-      margin-bottom: 1rem;
-      overflow: hidden;
-    }
-
-    .hero-name span {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(60px);
-    }
-
-    .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.3rem);
-      font-weight: 300;
-      color: var(--muted);
-      margin-bottom: 0.6rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 1s forwards;
-    }
-
-    .hero-school {
-      font-size: 0.85rem;
-      color: var(--gold-dim);
-      letter-spacing: 0.08em;
-      margin-bottom: 4rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 1.2s forwards;
-    }
-
-    /* ── NAV BUTTONS (Hero) ── */
-    .hero-nav {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-      max-width: 900px;
-      width: 100%;
-      opacity: 0;
-      animation: fadeUp 0.8s 1.5s forwards;
-    }
-
-    .hero-btn {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      padding: 2rem 1rem;
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      text-decoration: none;
-      color: var(--white);
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      backdrop-filter: blur(8px);
-      transition: all 0.35s cubic-bezier(0.23,1,0.32,1);
-      overflow: hidden;
-      cursor: pointer;
-    }
-
-    .hero-btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(245,200,66,0.12), transparent);
-      opacity: 0;
-      transition: opacity 0.35s;
-    }
-
-    .hero-btn:hover::before { opacity: 1; }
-    .hero-btn:hover {
-      border-color: var(--gold);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(245,200,66,0.12);
-    }
-
-    .hero-btn .btn-icon {
-      font-size: 2rem;
-      line-height: 1;
-    }
-
-    .hero-btn .btn-label {
-      text-transform: uppercase;
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      color: var(--muted);
-    }
-
-    .hero-btn:hover .btn-label { color: var(--gold); }
-
-    /* ── SCROLL HINT ── */
-    .scroll-hint {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 2s forwards;
-    }
-
-    .scroll-hint span {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .scroll-line {
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-      animation: scrollPulse 2s infinite;
-    }
-
-    /* ── SECTIONS ── */
-    section {
-      position: relative;
-      z-index: 1;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 6rem 2rem;
-    }
-
-    .section-eyebrow {
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1rem;
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-    }
-
-    .section-title em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .section-divider {
-      width: 60px;
-      height: 2px;
-      background: var(--gold);
-      margin-bottom: 2.5rem;
-    }
-
-    /* ── HAKKIMDA ── */
-    #hakkimda .bio-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: start;
-    }
-
-    #hakkimda p {
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.85;
-      margin-bottom: 1.2rem;
-    }
-
-    .bio-card {
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 2rem;
-      backdrop-filter: blur(8px);
-    }
-
-    .bio-card h3 {
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.5rem;
-    }
-
-    .bio-stat {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.8rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      font-size: 0.9rem;
-    }
-
-    .bio-stat:last-child { border-bottom: none; }
-    .bio-stat .label { color: var(--muted); }
-    .bio-stat .value { color: var(--white); font-weight: 500; }
-
-    /* ── DENEYİM ── */
-    #deneyim .exp-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .exp-card {
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 2rem 2.5rem;
-      backdrop-filter: blur(8px);
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 1.5rem;
-      align-items: start;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-
-    .exp-card:hover {
-      border-color: var(--gold);
-      transform: translateX(6px);
-    }
-
-    .exp-icon {
-      font-size: 2rem;
-      width: 56px;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(245,200,66,0.1);
-      border-radius: 12px;
-    }
-
-    .exp-card h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.3rem;
-    }
-
-    .exp-card .exp-org {
-      font-size: 0.8rem;
-      color: var(--gold-dim);
-      letter-spacing: 0.05em;
-      margin-bottom: 0.7rem;
-    }
-
-    .exp-card p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    /* ── FOTOĞRAFLAR ── */
-    #fotograflar .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-
-    .photo-placeholder {
-      aspect-ratio: 3/4;
-      background: var(--navy-light);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.8rem;
-      color: var(--muted);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: all 0.3s;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .photo-placeholder:hover {
-      border-color: var(--gold);
-      background: var(--glass);
-    }
-
-    .photo-placeholder .ph-icon { font-size: 2.5rem; opacity: 0.3; }
-
-    .photo-note {
-      margin-top: 2rem;
-      padding: 1.2rem 1.8rem;
-      background: rgba(245,200,66,0.06);
-      border: 1px solid rgba(245,200,66,0.2);
-      border-radius: 12px;
-      font-size: 0.85rem;
-      color: var(--gold-dim);
-      line-height: 1.6;
-    }
-
-    /* ── İLETİŞİM ── */
-    #iletisim .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-
-    .contact-card {
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-      text-decoration: none;
-      color: var(--white);
-      backdrop-filter: blur(8px);
-      transition: all 0.3s;
-    }
-
-    .contact-card:hover {
-      border-color: var(--gold);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(245,200,66,0.1);
-    }
-
-    .contact-icon {
-      font-size: 1.8rem;
-      width: 52px;
-      height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(245,200,66,0.1);
-      border-radius: 12px;
-      flex-shrink: 0;
-    }
-
-    .contact-info .contact-type {
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.3rem;
-    }
-
-    .contact-info .contact-val {
-      font-size: 0.95rem;
-      font-weight: 500;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 3rem 2rem;
-      border-top: 1px solid var(--glass-border);
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
-
-    footer span { color: var(--gold); }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s, transform 0.7s;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { display: none; }
-      .hero-nav { grid-template-columns: repeat(2, 1fr); }
-      #hakkimda .bio-grid { grid-template-columns: 1fr; }
-      #iletisim .contact-grid { grid-template-columns: 1fr; }
-      #fotograflar .photo-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eymen Güntepe | Kişisel Biyografi</title>
+    <!-- Google Fonts & FontAwesome İkonları -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Harici CSS Dosyamız -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- Stars Canvas -->
-<canvas id="stars-canvas"></canvas>
-
-<!-- Audio -->
-<audio id="bg-music" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-creative-minds.mp3" type="audio/mpeg"/>
-</audio>
-
-<!-- NAV -->
-<nav>
-  <a href="#hero" class="nav-logo">EG</a>
-  <ul class="nav-links">
-    <li><a href="#hakkimda">Hakkımda</a></li>
-    <li><a href="#deneyim">Deneyim</a></li>
-    <li><a href="#fotograflar">Fotoğraflar</a></li>
-    <li><a href="#iletisim">İletişim</a></li>
-  </ul>
-  <button id="music-btn" onclick="toggleMusic()">
-    <span id="music-icon">♪</span>
-    <span id="music-label">Müzik</span>
-  </button>
-</nav>
-
-<!-- HERO -->
-<div id="hero">
-  <p class="hero-label">Biyografi</p>
-  <h1 class="hero-name" id="hero-name"></h1>
-  <p class="hero-sub">11. Sınıf Öğrencisi</p>
-  <p class="hero-school">Şehit Öğretmen Necmeddin Kuyucu Anadolu Lisesi</p>
-
-  <div class="hero-nav">
-    <a href="#hakkimda" class="hero-btn">
-      <span class="btn-icon">👤</span>
-      <strong>Hakkımda</strong>
-      <span class="btn-label">Kim olduğum</span>
-    </a>
-    <a href="#deneyim" class="hero-btn">
-      <span class="btn-icon">⚡</span>
-      <strong>Deneyim</strong>
-      <span class="btn-label">Neler yaptım</span>
-    </a>
-    <a href="#fotograflar" class="hero-btn">
-      <span class="btn-icon">📷</span>
-      <strong>Fotoğraflar</strong>
-      <span class="btn-label">Galeri</span>
-    </a>
-    <a href="#iletisim" class="hero-btn">
-      <span class="btn-icon">✉️</span>
-      <strong>İletişim</strong>
-      <span class="btn-label">Ulaş bana</span>
-    </a>
-  </div>
-
-  <div class="scroll-hint">
-    <span>Aşağı kaydır</span>
-    <div class="scroll-line"></div>
-  </div>
-</div>
-
-<!-- HAKKIMDA -->
-<section id="hakkimda">
-  <div class="fade-in">
-    <p class="section-eyebrow">01 — Hakkımda</p>
-    <h2 class="section-title">Ben kimim,<br/><em>ne hedefliyorum?</em></h2>
-    <div class="section-divider"></div>
-  </div>
-  <div class="bio-grid fade-in">
-    <div>
-      <p>Merhaba! Ben Eymen Güntepe. Şehit Öğretmen Necmeddin Kuyucu Anadolu Lisesi'nde 11. sınıf öğrencisiyim. Teknolojiye, öğrenmeye ve kendimi geliştirmeye büyük önem veriyorum.</p>
-      <p>Yazılım ve teknoloji alanındaki gelişmeleri yakından takip ediyorum. Yeni şeyler öğrenmekten heyecan duyuyor, fikirlerimi projelerle hayata geçirmeye çalışıyorum.</p>
-      <p>Bu sayfa, beni tanıyan ya da tanımak isteyen herkese kendimi anlatmak için oluşturduğum kişisel bir pencere.</p>
+    <!-- Arka Plan Müzik Çalar -->
+    <div class="music-player">
+        <div class="music-info">
+            <i class="fa-solid fa-music class-pulse"></i>
+            <span>Arka Plan Müziği</span>
+        </div>
+        <audio controls loop>
+            <source src="muzik.mp3" type="audio/mpeg">
+        </audio>
     </div>
-    <div class="bio-card">
-      <h3>Kişisel Bilgiler</h3>
-      <div class="bio-stat">
-        <span class="label">Ad Soyad</span>
-        <span class="value">Eymen Güntepe</span>
-      </div>
-      <div class="bio-stat">
-        <span class="label">Sınıf</span>
-        <span class="value">11. Sınıf</span>
-      </div>
-      <div class="bio-stat">
-        <span class="label">Okul</span>
-        <span class="value">Ş.Ö.N.K. Anadolu Lisesi</span>
-      </div>
-      <div class="bio-stat">
-        <span class="label">Şehir</span>
-        <span class="value">Kocaeli</span>
-      </div>
-      <div class="bio-stat">
-        <span class="label">İlgi Alanları</span>
-        <span class="value">Teknoloji, Kodlama</span>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- DENEYİM -->
-<section id="deneyim">
-  <div class="fade-in">
-    <p class="section-eyebrow">02 — Deneyim</p>
-    <h2 class="section-title">Neleri<br/><em>deneyimledim?</em></h2>
-    <div class="section-divider"></div>
-  </div>
-  <div class="exp-list">
-    <div class="exp-card fade-in">
-      <div class="exp-icon">🖥️</div>
-      <div>
-        <h3>Web Geliştirme</h3>
-        <p class="exp-org">Kişisel Projeler</p>
-        <p>HTML, CSS ve JavaScript kullanarak web sayfaları oluşturuyorum. Kullanıcı deneyimine önem vererek estetik ve işlevsel tasarımlar yapmaya çalışıyorum.</p>
-      </div>
-    </div>
-    <div class="exp-card fade-in">
-      <div class="exp-icon">🏫</div>
-      <div>
-        <h3>Okul Projeleri & Etkinlikler</h3>
-        <p class="exp-org">Şehit Öğretmen Necmeddin Kuyucu Anadolu Lisesi</p>
-        <p>Okul içi projelerde aktif rol alıyor, etkinliklerde görev üstleniyorum. Takım çalışmasına inanan ve sorumluluk almaktan çekinmeyen biriyim.</p>
-      </div>
-    </div>
-    <div class="exp-card fade-in">
-      <div class="exp-icon">📚</div>
-      <div>
-        <h3>Sürekli Öğrenme</h3>
-        <p class="exp-org">Online Kaynaklar & Kurslar</p>
-        <p>Programlama ve teknoloji alanında online kaynaklardan sürekli kendimi geliştiriyorum. Merak etmek ve sorgulamak en büyük motivasyon kaynağım.</p>
-      </div>
-    </div>
-    <div class="exp-card fade-in">
-      <div class="exp-icon">🎯</div>
-      <div>
-        <h3>GitHub & Versiyon Kontrolü</h3>
-        <p class="exp-org">Kişisel GitHub Hesabı</p>
-        <p>Projelerimi GitHub üzerinde yayınlayarak açık kaynak dünyasına katkı sağlamayı öğreniyorum. Kod paylaşmak ve toplulukla büyümek önemli bir hedefim.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- Giriş (Hero) Bölümü -->
+    <section id="giris" class="hero-section">
+        <div class="hero-container">
+            <div class="badge">11. Sınıf Öğrencisi</div>
+            <h1>Eymen Güntepe</h1>
+            <p class="school-text">Şehit Öğretmen Necmeddin Kuyucu Anadolu Lisesi</p>
+            
+            <!-- Butonlar -->
+            <div class="button-group">
+                <a href="#hakkimda" class="custom-btn btn-glow">Hakkımda</a>
+                <a href="#cv" class="custom-btn btn-glow cv-highlight-btn"><i class="fa-solid fa-file-pdf"></i> CV / Özgeçmiş</a>
+                <a href="#deneyim" class="custom-btn btn-glow">Deneyim</a>
+                <a href="#fotograflar" class="custom-btn btn-glow">Fotoğraflar</a>
+                <a href="#iletisim" class="custom-btn btn-glow">İletişim</a>
+            </div>
+        </div>
+    </section>
 
-<!-- FOTOĞRAFLAR -->
-<section id="fotograflar">
-  <div class="fade-in">
-    <p class="section-eyebrow">03 — Fotoğraflar</p>
-    <h2 class="section-title">Anlara ait<br/><em>kareler</em></h2>
-    <div class="section-divider"></div>
-  </div>
-  <div class="photo-grid fade-in">
-    <div class="photo-placeholder">
-      <span class="ph-icon">🖼️</span>
-      <span>Fotoğraf 1</span>
-    </div>
-    <div class="photo-placeholder">
-      <span class="ph-icon">🖼️</span>
-      <span>Fotoğraf 2</span>
-    </div>
-    <div class="photo-placeholder">
-      <span class="ph-icon">🖼️</span>
-      <span>Fotoğraf 3</span>
-    </div>
-    <div class="photo-placeholder">
-      <span class="ph-icon">🖼️</span>
-      <span>Fotoğraf 4</span>
-    </div>
-    <div class="photo-placeholder">
-      <span class="ph-icon">🖼️</span>
-      <span>Fotoğraf 5</span>
-    </div>
-    <div class="photo-placeholder">
-      <span class="ph-icon">🖼️</span>
-      <span>Fotoğraf 6</span>
-    </div>
-  </div>
-  <div class="photo-note fade-in">
-    💡 <strong>Not:</strong> Bu bölüme kendi fotoğraflarını eklemek için HTML dosyasındaki <code>.photo-placeholder</code> div'lerini <code>&lt;img src="foto.jpg" /&gt;</code> ile değiştir. GitHub'a görselleri de yükledikten sonra yayına girecek!
-  </div>
-</section>
+    <!-- Hakkımda Bölümü -->
+    <section id="hakkimda" class="content-section">
+        <h2 class="section-title">Hakkımda</h2>
+        <div class="card about-card">
+            <p>Merhaba! Ben <strong>Eymen Güntepe</strong>. Şehit Öğretmen Necmeddin Kuyucu Anadolu Lisesi'nde 11. sınıf öğrencisiyim. Teknolojiye, yazılıma ve dijital tasarıma büyük bir ilgi duyuyorum. Kendimi bu alanlarda geliştirmek ve geleceğe yönelik başarılı projeler üretmek için çalışıyorum. Web geliştirme ve GitHub gibi platformları öğrenerek teknoloji dünyasındaki adımlarımı hızlandırıyorum.</p>
+        </div>
+    </section>
 
-<!-- İLETİŞİM -->
-<section id="iletisim">
-  <div class="fade-in">
-    <p class="section-eyebrow">04 — İletişim</p>
-    <h2 class="section-title">Seninle<br/><em>konuşalım</em></h2>
-    <div class="section-divider"></div>
-  </div>
-  <div class="contact-grid fade-in">
-    <a href="mailto:eymen@ornek.com" class="contact-card">
-      <div class="contact-icon">✉️</div>
-      <div class="contact-info">
-        <div class="contact-type">E-Posta</div>
-        <div class="contact-val">eymen@ornek.com</div>
-      </div>
-    </a>
-    <a href="https://github.com/eymenguntepe" target="_blank" class="contact-card">
-      <div class="contact-icon">🐙</div>
-      <div class="contact-info">
-        <div class="contact-type">GitHub</div>
-        <div class="contact-val">github.com/eymenguntepe</div>
-      </div>
-    </a>
-    <a href="https://instagram.com/eymenguntepe" target="_blank" class="contact-card">
-      <div class="contact-icon">📸</div>
-      <div class="contact-info">
-        <div class="contact-type">Instagram</div>
-        <div class="contact-val">@eymenguntepe</div>
-      </div>
-    </a>
-    <a href="#" class="contact-card">
-      <div class="contact-icon">💼</div>
-      <div class="contact-info">
-        <div class="contact-type">LinkedIn</div>
-        <div class="contact-val">Yakında eklenecek</div>
-      </div>
-    </a>
-  </div>
-</section>
+    <!-- YENİ: CV / Özgeçmiş Bölümü -->
+    <section id="cv" class="content-section">
+        <h2 class="section-title">Özgeçmiş (CV)</h2>
+        <div class="cv-container">
+            <div class="cv-info-card">
+                <div class="cv-icon">
+                    <i class="fa-regular fa-file-pdf"></i>
+                </div>
+                <div class="cv-text">
+                    <h3>Akademik ve Teknik Özgeçmiş</h3>
+                    <p>Eğitim hayatım, katıldığım projeler, teknik yetkinliklerim ve ilgi alanlarımın yer aldığı güncel CV'me aşağıdan ulaşabilirsiniz.</p>
+                </div>
+                <!-- "cv.pdf" dosyasını projenin ana klasörüne yüklemeyi unutma -->
+                <a href="cv.pdf" target="_blank" class="cv-download-btn">
+                    <i class="fa-solid fa-download"></i> CV'yi İndir / Görüntüle
+                </a>
+            </div>
+        </div>
+    </section>
 
-<!-- FOOTER -->
-<footer>
-  <p>© 2025 <span>Eymen Güntepe</span> — Tüm hakları saklıdır.</p>
-  <p style="margin-top:0.4rem; font-size:0.72rem;">Şehit Öğretmen Necmeddin Kuyucu Anadolu Lisesi · Kocaeli</p>
-</footer>
+    <!-- Deneyim Bölümü -->
+    <section id="deneyim" class="content-section">
+        <h2 class="section-title">Deneyim</h2>
+        <div class="timeline">
+            <div class="timeline-box">
+                <span class="date">2025 - 2026</span>
+                <h3>Web Geliştirme & Tasarım</h3>
+                <p>HTML, CSS ve temel web technologies üzerine çalışmalar yapmaya başladım. Kendi projelerimi geliştirmek için GitHub platformunu aktif olarak kullanıyorum.</p>
+            </div>
+            <div class="timeline-box">
+                <span class="date">Gelecek Hedefleri</span>
+                <h3>Yazılım ve Yapay Zeka</h3>
+                <p>Lise eğitimime devam ederken bir yandan da algoritma mantığı, Python programlama ve modern arayüz tasarımları üzerine kendimi geliştirmeyi hedefliyorum.</p>
+            </div>
+        </div>
+    </section>
 
-<script>
-  /* ── STARS ── */
-  const canvas = document.getElementById('stars-canvas');
-  const ctx = canvas.getContext('2d');
-  let stars = [];
+    <!-- Fotoğraflar Bölümü -->
+    <section id="fotograflar" class="content-section">
+        <h2 class="section-title">Fotoğraflar</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="resim1.jpg" alt="Fotoğraf 1" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600'">
+            </div>
+            <div class="gallery-item">
+                <img src="resim2.jpg" alt="Fotoğraf 2" onerror="this.src='https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=600'">
+            </div>
+            <div class="gallery-item">
+                <img src="resim3.jpg" alt="Fotoğraf 3" onerror="this.src='https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?q=80&w=600'">
+            </div>
+        </div>
+    </section>
 
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
+    <!-- İletişim Bölümü -->
+    <section id="iletisim" class="content-section">
+        <h2 class="section-title">İletişim</h2>
+        <div class="contact-links">
+            <a href="https://github.com/eymenguntepe" target="_blank" class="contact-btn github">
+                <i class="fa-brands fa-github"></i> GitHub'da Takip Et
+            </a>
+            <a href="mailto:eymen@ornek.com" class="contact-btn email">
+                <i class="fa-solid fa-envelope"></i> E-Posta Gönder
+            </a>
+        </div>
+    </section>
 
-  function initStars() {
-    stars = [];
-    for (let i = 0; i < 180; i++) {
-      stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 1.4 + 0.2,
-        alpha: Math.random(),
-        speed: Math.random() * 0.004 + 0.001
-      });
-    }
-  }
-
-  function drawStars() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    stars.forEach(s => {
-      s.alpha += s.speed;
-      if (s.alpha > 1 || s.alpha < 0) s.speed *= -1;
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(245,200,66,${s.alpha * 0.5})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(drawStars);
-  }
-
-  resizeCanvas();
-  initStars();
-  drawStars();
-  window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
-
-  /* ── HERO NAME ANIMATION ── */
-  const name = "Eymen Güntepe";
-  const nameEl = document.getElementById('hero-name');
-  name.split('').forEach((ch, i) => {
-    const span = document.createElement('span');
-    span.textContent = ch === ' ' ? '\u00A0' : ch;
-    span.style.animation = `fadeUp 0.6s ${0.5 + i * 0.06}s forwards`;
-    nameEl.appendChild(span);
-  });
-
-  /* ── SCROLL FADE ── */
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-  /* ── MUSIC ── */
-  const audio = document.getElementById('bg-music');
-  const musicIcon = document.getElementById('music-icon');
-  const musicLabel = document.getElementById('music-label');
-  let playing = false;
-
-  function toggleMusic() {
-    if (playing) {
-      audio.pause();
-      musicIcon.textContent = '♪';
-      musicLabel.textContent = 'Müzik';
-      playing = false;
-    } else {
-      audio.volume = 0.25;
-      audio.play().catch(() => {});
-      musicIcon.textContent = '■';
-      musicLabel.textContent = 'Durdur';
-      playing = true;
-    }
-  }
-</script>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Eymen Güntepe. Tüm Hakları Saklıdır.</p>
+    </footer>
 
 </body>
 </html>
