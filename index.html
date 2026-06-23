@@ -1,378 +1,448 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eymen Güntepe | Kişisel Biyografi</title>
-    <!-- Google Fonts & FontAwesome İkonları -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- CSS KODLARINI DOĞRUDAN BURAYA GÖMDÜK (BAĞLANTI HATASI İHTİMALİ SIFIR) -->
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eymen Güntepe — Biyografi</title>
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #0b0f19;
-            color: #e2e8f0;
-            overflow-x: hidden;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        h1, h2, h3, .badge {
-            font-family: 'Space Grotesk', sans-serif;
-        }
+<style>
+/* =========================================================
+   BİYOGRAFİ SİTESİ — "Hayatın Taslağı" / Blueprint Teması
+   ========================================================= */
+:root {
+  --bg-deep:     #0F2942;
+  --bg-panel:    #15334F;
+  --bg-panel-2:  #11304D;
+  --grid-line:   rgba(143, 168, 194, 0.16);
+  --grid-line-strong: rgba(143, 168, 194, 0.28);
+  --accent:      #D4A24C;
+  --accent-dim:  rgba(212, 162, 76, 0.35);
+  --text-paper:  #F1EEE4;
+  --text-muted:  #8FA8C2;
+  --border-soft: rgba(241, 238, 228, 0.14);
 
-        /* Arka Plan Müzik Çalar */
-        .music-player {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 12px 20px;
-            border-radius: 50px;
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
 
-        .music-info {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-            color: #38bdf8;
-        }
+  --section-pad-y: 5rem;
+  --section-pad-x: clamp(1.5rem, 6vw, 6rem);
+  --max-width: 1080px;
+}
 
-        .music-player audio {
-            height: 28px;
-            width: 220px;
-        }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
-        /* Giriş (Hero) Ekranı */
-        .hero-section {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle at top right, #1e1b4b 0%, #0b0f19 70%);
-            text-align: center;
-            padding: 20px;
-        }
+body {
+  background: var(--bg-deep);
+  color: var(--text-paper);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
 
-        .badge {
-            background: linear-gradient(90deg, #4f46e5, #06b6d4);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            display: inline-block;
-            margin-bottom: 20px;
-            box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
-        }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing: 0.01em; }
 
-        .hero-container h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffffff 40%, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-        }
+/* Müzik Çalar Stili */
+.music-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  background: rgba(21, 51, 79, 0.9);
+  border: 1px solid var(--accent-dim);
+  padding: 10px 15px;
+  border-radius: 30px;
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.music-player audio { height: 26px; width: 180px; }
+.music-player i { color: var(--accent); }
 
-        .school-text {
-            font-size: 1.3rem;
-            color: #38bdf8;
-            margin-bottom: 40px;
-            font-weight: 500;
-        }
+/* Header */
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem var(--section-pad-x);
+  background: rgba(15, 41, 66, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-soft);
+}
+.site-header .logo {
+  font-family: var(--font-mono); font-weight: 700; font-size: 1rem; color: var(--accent);
+  letter-spacing: 0.08em; border: 1px solid var(--accent-dim); padding: 0.35rem 0.6rem;
+}
+.main-nav { display: flex; gap: 1.5rem; }
+.main-nav a {
+  font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-muted); position: relative; padding-bottom: 0.3rem;
+  transition: color 0.2s ease;
+}
+.main-nav a::after {
+  content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 1px;
+  background: var(--accent); transition: width 0.25s ease;
+}
+.main-nav a:hover::after { width: 100%; }
+.main-nav a:hover { color: var(--text-paper); }
 
-        /* Buton Tasarımları */
-        .button-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+/* Hero Kısmı */
+.hero {
+  position: relative; min-height: 100vh; display: flex;
+  align-items: center; justify-content: center; overflow: hidden; padding: 0 var(--section-pad-x);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, var(--grid-line) 0px, var(--grid-line) 1px, transparent 1px, transparent 56px),
+    repeating-linear-gradient(90deg, var(--grid-line) 0px, var(--grid-line) 1px, transparent 1px, transparent 56px);
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 45%, black 40%, transparent 90%);
+}
+.corner { position: absolute; width: 28px; height: 28px; border: 2px solid var(--accent-dim); }
+.corner-tl { top: 2rem; left: 2rem; border-right: none; border-bottom: none; }
+.corner-tr { top: 2rem; right: 2rem; border-left: none; border-bottom: none; }
+.corner-bl { bottom: 2rem; left: 2rem; border-right: none; border-top: none; }
+.corner-br { bottom: 2rem; right: 2rem; border-left: none; border-top: none; }
 
-        .custom-btn {
-            text-decoration: none;
-            color: #fff;
-            padding: 14px 30px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
+.hero-content { position: relative; z-index: 2; text-align: center; max-width: 720px; margin-top: 4rem;}
+.hero-eyebrow { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.18em; color: var(--accent); margin-bottom: 1.5rem; }
+.hero-name { font-size: clamp(2.2rem, 8vw, 4.5rem); line-height: 1.1; color: var(--text-paper); text-transform: uppercase; }
+.hero-tagline { font-family: var(--font-body); font-style: italic; font-size: clamp(1rem, 2vw, 1.25rem); color: var(--text-muted); margin-top: 1.5rem; margin-bottom: 2rem;}
 
-        .btn-glow:hover {
-            background: #ffffff;
-            color: #0b0f19;
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
-            border-color: #fff;
-        }
+/* Hero Hızlı Erişim Linkleri (Buton Gibi Linkler) */
+.hero-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+.hero-links a {
+  font-family: var(--font-mono); font-size: 0.8rem; border: 1px solid var(--accent);
+  padding: 0.6rem 1.2rem; color: var(--accent); background: rgba(212, 162, 76, 0.05);
+  transition: all 0.3s ease;
+}
+.hero-links a:hover { background: var(--accent); color: var(--bg-deep); transform: translateY(-2px); }
 
-        .cv-highlight-btn {
-            border-color: rgba(56, 189, 248, 0.4) !important;
-            background: rgba(56, 189, 248, 0.05) !important;
-        }
+.title-block {
+  position: absolute; right: 2rem; bottom: 2rem; z-index: 2;
+  border: 1px solid var(--border-soft); background: rgba(21, 51, 79, 0.65); font-family: var(--font-mono); font-size: 0.7rem;
+}
+.tb-row { display: flex; border-bottom: 1px solid var(--border-soft); }
+.tb-row:last-child { border-bottom: none; }
+.tb-label { width: 64px; padding: 0.4rem 0.6rem; color: var(--text-muted); border-right: 1px solid var(--border-soft); letter-spacing: 0.05em; }
+.tb-value { padding: 0.4rem 0.7rem; color: var(--text-paper); white-space: nowrap; }
 
-        .cv-highlight-btn:hover {
-            background: #38bdf8 !important;
-            color: #0b0f19 !important;
-            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.4) !important;
-            border-color: #38bdf8 !important;
-        }
+/* Genel Bölümler */
+section:not(.hero) { max-width: var(--max-width); margin: 0 auto; padding: var(--section-pad-y) var(--section-pad-x); }
+.section-heading { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 3rem; border-bottom: 1px solid var(--border-soft); padding-bottom: 1rem; }
+.section-index { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); }
+.section-heading h2 { font-size: clamp(1.5rem, 3vw, 2rem); color: var(--text-paper); }
 
-        /* İçerik Bölümleri */
-        .content-section {
-            padding: 100px 20px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
+/* Hakkımda */
+.about-grid { display: grid; grid-template-columns: 220px 1fr; gap: 3.5rem; align-items: start; }
+.about-portrait { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
+.portrait-frame {
+  width: 180px; height: 180px; border-radius: 50%; border: 1px dashed var(--accent-dim);
+  display: flex; align-items: center; justify-content: center; background: var(--bg-panel); position: relative; overflow: hidden;
+}
+.portrait-frame::before { content: ""; position: absolute; inset: 14px; border: 1px solid var(--border-soft); border-radius: 50%; z-index: 1;}
+.portrait-frame span { font-family: var(--font-display); font-size: 2.4rem; color: var(--accent); z-index: 2; }
+.portrait-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; z-index: 2; }
+.portrait-caption { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.08em; color: var(--text-muted); }
+.about-text p { color: var(--text-paper); margin-bottom: 1.2rem; }
+.about-text strong { color: var(--accent); }
 
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            position: relative;
-            color: #fff;
-        }
+/* CV Alanı */
+.cv-blueprint-card {
+  border: 1px dashed var(--accent); background: rgba(21, 51, 79, 0.4);
+  padding: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+}
+.cv-btn {
+  font-family: var(--font-mono); font-size: 0.85rem; border: 1px solid var(--accent);
+  padding: 0.75rem 1.5rem; color: var(--bg-deep); background: var(--accent); font-weight: bold;
+  transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px;
+}
+.cv-btn:hover { background: transparent; color: var(--accent); }
 
-        .section-title::before {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, #38bdf8, #4f46e5);
-            border-radius: 2px;
-        }
+/* Zaman Çizelgesi (Deneyim) */
+.timeline-track { position: relative; padding-left: 2.5rem; border-left: 1px solid var(--grid-line-strong); }
+.timeline-entry { position: relative; margin-bottom: 2.75rem; }
+.timeline-entry:last-child { margin-bottom: 0; }
+.timeline-entry::before {
+  content: ""; position: absolute; left: -2.56rem; top: 0.35rem; width: 9px; height: 9px;
+  border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--bg-deep);
+}
+.t-year { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+.t-card h3 { font-size: 1.1rem; color: var(--text-paper); margin-bottom: 0.4rem; }
+.t-card p { color: var(--text-muted); max-width: 680px; }
 
-        .card {
-            background: rgba(30, 41, 59, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px;
-            border-radius: 24px;
-            line-height: 1.8;
-            font-size: 1.15rem;
-            color: #cbd5e1;
-        }
+/* Yetenekler */
+.skills-grid { display: grid; gap: 1.8rem; }
+.skill-top { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-paper); margin-bottom: 0.5rem; }
+.skill-pct { color: var(--text-muted); }
+.skill-track {
+  position: relative; height: 6px; background: var(--bg-panel); border: 1px solid var(--border-soft);
+  background-image: repeating-linear-gradient(90deg, var(--grid-line) 0, var(--grid-line) 1px, transparent 1px, transparent 10%);
+}
+.skill-fill { height: 100%; background: var(--accent); }
 
-        .card strong { color: #fff; }
+/* Fotoğraflar */
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.gallery-item { overflow: hidden; border-radius: 4px; height: 240px; background: var(--bg-panel); border: 1px solid var(--border-soft); }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: all 0.4s ease; }
+.gallery-item:hover img { transform: scale(1.05); opacity: 1; }
 
-        /* CV Kart Alanı */
-        .cv-info-card {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.8) 100%);
-            border: 1px solid rgba(56, 189, 248, 0.15);
-            padding: 40px;
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
+/* İletişim */
+.contact-legend { display: grid; gap: 1px; border: 1px solid var(--border-soft); }
+.contact-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.4rem; background: var(--bg-panel-2); transition: background 0.2s ease; }
+.contact-item:hover { background: var(--bg-panel); }
+.contact-key { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--accent); display: flex; align-items: center; gap: 8px; }
+.contact-val { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-paper); }
 
-        .cv-icon {
-            font-size: 3.5rem;
-            color: #38bdf8;
-            background: rgba(56, 189, 248, 0.1);
-            width: 90px;
-            height: 90px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 20px;
-        }
+/* Footer */
+.site-footer { text-align: center; padding: 2.5rem var(--section-pad-x); border-top: 1px solid var(--border-soft); }
+.site-footer p { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--text-muted); }
 
-        .cv-text { flex: 1; min-width: 250px; }
-        .cv-text h3 { font-size: 1.5rem; color: #fff; margin-bottom: 8px; }
-        .cv-text p { color: #94a3b8; line-height: 1.6; }
+/* Scroll Efektleri */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
 
-        .cv-download-btn {
-            text-decoration: none;
-            color: #fff;
-            background: linear-gradient(135deg, #38bdf8, #4f46e5);
-            padding: 16px 32px;
-            border-radius: 14px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .cv-download-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.5);
-        }
-
-        /* Deneyim Zaman Çizelgesi */
-        .timeline { display: flex; flex-direction: column; gap: 30px; }
-        .timeline-box {
-            background: rgba(30, 41, 59, 0.25);
-            border-left: 4px solid #38bdf8;
-            padding: 25px 30px;
-            border-radius: 0 20px 20px 0;
-            border-top: 1px solid rgba(255,255,255,0.02);
-            border-right: 1px solid rgba(255,255,255,0.02);
-            border-bottom: 1px solid rgba(255,255,255,0.02);
-        }
-        .timeline-box .date { font-size: 0.9rem; color: #38bdf8; font-weight: 700; }
-        .timeline-box h3 { margin: 8px 0; font-size: 1.4rem; color: #fff; }
-
-        /* Fotoğraf Galerisi */
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
-        .gallery-item { border-radius: 20px; overflow: hidden; height: 250px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
-        .gallery-item:hover img { transform: scale(1.08); }
-
-        /* İletişim Butonları */
-        .contact-links { display: flex; gap: 20px; flex-wrap: wrap; }
-        .contact-btn {
-            text-decoration: none; padding: 18px 35px; border-radius: 16px; font-weight: 700;
-            display: flex; align-items: center; gap: 12px; font-size: 1.1rem; color: #fff; transition: all 0.3s ease;
-        }
-        .github { background: #24292e; box-shadow: 0 10px 20px rgba(36, 41, 46, 0.3); }
-        .email { background: #0284c7; box-shadow: 0 10px 20px rgba(2, 132, 199, 0.3); }
-        .contact-btn:hover { transform: translateY(-4px); box-shadow: 0 15px 25px rgba(0,0,0,0.4); }
-
-        footer { text-align: center; padding: 50px 20px; color: #64748b; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.95rem; }
-
-        @media (max-width: 768px) {
-            .hero-container h1 { font-size: 2.8rem; }
-            .school-text { font-size: 1.1rem; }
-            .cv-info-card { text-align: center; justify-content: center; flex-direction: column; padding: 30px 20px; }
-            .cv-download-btn { width: 100%; justify-content: center; }
-            .music-player { bottom: 15px; right: 15px; left: 15px; width: calc(100% - 30px); border-radius: 20px; }
-            .music-player audio { width: 100%; }
-        }
-    </style>
+@media (max-width: 720px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-portrait { margin: 0 auto; }
+  .title-block { display: none; }
+  .corner { width: 18px; height: 18px; }
+  .contact-item { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+}
+</style>
 </head>
 <body>
 
-    <!-- Arka Plan Müzik Çalar -->
-    <div class="music-player">
-        <div class="music-info">
-            <i class="fa-solid fa-music"></i>
-            <span>Arka Plan Müziği</span>
-        </div>
-        <audio controls loop>
-            <source src="muzik.mp3" type="audio/mpeg">
-        </audio>
+<div class="music-player">
+    <i class="fa-solid fa-music"></i>
+    <audio controls loop>
+        <source src="muzik.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+<header class="site-header">
+  <a href="#hero" class="logo">EG</a>
+  <nav class="main-nav">
+    <a href="#hakkimda">Hakkımda</a>
+    <a href="#cv">CV</a>
+    <a href="#deneyim">Deneyim</a>
+    <a href="#yetenekler">Yetenekler</a>
+    <a href="#fotograflar">Fotoğraflar</a>
+    <a href="#iletisim">İletişim</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero" id="hero">
+    <div class="hero-grid" aria-hidden="true"></div>
+
+    <span class="corner corner-tl" aria-hidden="true"></span>
+    <span class="corner corner-tr" aria-hidden="true"></span>
+    <span class="corner corner-bl" aria-hidden="true"></span>
+    <span class="corner corner-br" aria-hidden="true"></span>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">// KİŞİSEL BİYOGRAFİ — REV 2026</p>
+      <h1 class="hero-name">EYMEN<br>GÜNTEPE</h1>
+      <p class="hero-tagline">Şehit Öğretmen Necmeddin Kuyucu Anadolu Lisesi — 11. Sınıf</p>
+      
+      <div class="hero-links">
+        <a href="#hakkimda">HAKKIMDA</a>
+        <a href="#cv">CV / ÖZGEÇMİŞ</a>
+        <a href="#deneyim">DENEYİM</a>
+        <a href="#yetenekler">YETENEKLER</a>
+        <a href="#fotograflar">FOTOĞRAFLAR</a>
+        <a href="#iletisim">İLETİŞİM</a>
+      </div>
     </div>
 
-    <!-- Giriş (Hero) Bölümü -->
-    <section id="giris" class="hero-section">
-        <div class="hero-container">
-            <div class="badge">11. Sınıf Öğrencisi</div>
-            <h1>Eymen Güntepe</h1>
-            <p class="school-text">Şehit Öğretmen Necmeddin Kuyucu Anadolu Lisesi</p>
-            
-            <div class="button-group">
-                <a href="#hakkimda" class="custom-btn btn-glow">Hakkımda</a>
-                <a href="#cv" class="custom-btn btn-glow cv-highlight-btn"><i class="fa-solid fa-file-pdf"></i> CV / Özgeçmiş</a>
-                <a href="#deneyim" class="custom-btn btn-glow">Deneyim</a>
-                <a href="#fotograflar" class="custom-btn btn-glow">Fotoğraflar</a>
-                <a href="#iletisim" class="custom-btn btn-glow">İletişim</a>
-            </div>
-        </div>
-    </section>
+    <div class="title-block">
+      <div class="tb-row"><span class="tb-label">AD</span><span class="tb-value">Eymen Güntepe</span></div>
+      <div class="tb-row"><span class="tb-label">OKUL</span><span class="tb-value">S.O.N.K.A. Lisesi</span></div>
+      <div class="tb-row"><span class="tb-label">ALAN</span><span class="tb-value">Robotik & Otonom Sistemler</span></div>
+      <div class="tb-row"><span class="tb-label">TARİH</span><span class="tb-value">2026-06</span></div>
+    </div>
+  </section>
 
-    <!-- Hakkımda Bölümü -->
-    <section id="hakkimda" class="content-section">
-        <h2 class="section-title">Hakkımda</h2>
-        <div class="card about-card">
-            <p>Merhaba! Ben <strong>Eymen Güntepe</strong>. Şehit Öğretmen Necmeddin Kuyucu Anadolu Lisesi'nde 11. sınıf öğrencisiyim. Teknolojiye, yazılıma ve dijital tasarıma büyük bir ilgi duyuyorum. Kendimi bu alanlarda geliştirmek ve geleceğe yönelik başarılı projeler üretmek için çalışıyorum. Web geliştirme ve GitHub gibi platformları öğrenerek teknoloji dünyasındaki adımlarımı hızlandırıyorum.</p>
-        </div>
-    </section>
+  <section id="hakkimda">
+    <div class="section-heading">
+      <span class="section-index">01</span>
+      <h2>Hakkımda</h2>
+    </div>
 
-    <!-- CV Bölümü -->
-    <section id="cv" class="content-section">
-        <h2 class="section-title">Özgeçmiş (CV)</h2>
-        <div class="cv-info-card">
-            <div class="cv-icon">
-                <i class="fa-regular fa-file-pdf"></i>
-            </div>
-            <div class="cv-text">
-                <h3>Akademik ve Teknik Özgeçmiş</h3>
-                <p>Eğitim hayatım, katıldığım projeler, teknik yetkinliklerim ve ilgi alanlarımın yer aldığı güncel CV'me aşağıdan ulaşabilirsiniz.</p>
-            </div>
-            <a href="cv.pdf" target="_blank" class="cv-download-btn">
-                <i class="fa-solid fa-download"></i> CV'yi İndir / Görüntüle
-            </a>
+    <div class="about-grid">
+      <div class="about-portrait">
+        <div class="portrait-frame">
+          <span>EG</span>
         </div>
-    </section>
+        <span class="portrait-caption">ŞEKİL 1 — DETAY A</span>
+      </div>
 
-    <!-- Deneyim Bölümü -->
-    <section id="deneyim" class="content-section">
-        <h2 class="section-title">Deneyim</h2>
-        <div class="timeline">
-            <div class="timeline-box">
-                <span class="date">2025 - 2026</span>
-                <h3>Web Geliştirme & Tasarım</h3>
-                <p>HTML, CSS ve temel web teknolojileri üzerine çalışmalar yapmaya başladım. Kendi projelerimi geliştirmek için GitHub platformunu aktif olarak kullanıyorum.</p>
-            </div>
-            <div class="timeline-box">
-                <span class="date">Gelecek Hedefleri</span>
-                <h3>Yazılım ve Yapay Zeka</h3>
-                <p>Lise eğitimime devam ederken bir yandan da algoritma mantığı, Python programlama ve modern arayüz tasarımları üzerine kendimi geliştirmeyi hedefliyorum.</p>
-            </div>
+      <div class="about-text">
+        <p>Ben <strong>Eymen Güntepe</strong>. Şehit Öğretmen Necmeddin Kuyucu Anadolu Lisesi'nde 11. sınıf öğrencisiyim. Gömülü sistemler, otonom insansız hava araçları (İHA) ve bilgisayarlı görü teknolojilerine derin bir ilgi duyuyorum.</p>
+        <p>Geliştirdiğim projelerde donanım ve yazılım mimarilerini bir araya getirmeyi, otonom uçuş algoritmaları kurmayı ve teknolojik problemleri pratik yaklaşımlarla çözmeyi seviyorum. Öğrenme serüvenimi ve teknik birikimimi açık kaynaklı projeler üreterek pekiştiriyorum.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="cv">
+    <div class="section-heading">
+      <span class="section-index">02</span>
+      <h2>Özgeçmiş (CV)</h2>
+    </div>
+    <div class="cv-blueprint-card">
+      <div>
+        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Güncel Teknik Özgeçmiş</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Eğitim bilgilerimin, teknik projelerimin ve İHA çalışmalarımın yer aldığı PDF sürümü.</p>
+      </div>
+      <a href="cv.pdf" target="_blank" class="cv-btn">
+        <i class="fa-solid fa-file-pdf"></i> CV'Yİ GÖRÜNTÜLE / İNDİR
+      </a>
+    </div>
+  </section>
+
+  <section id="deneyim">
+    <div class="section-heading">
+      <span class="section-index">03</span>
+      <h2>Deneyim &amp; Projeler</h2>
+    </div>
+
+    <div class="timeline-track">
+      <div class="timeline-entry">
+        <div class="t-year">2026 - Günümüz</div>
+        <div class="t-card">
+          <h3>ModülX Takımı Üyesi</h3>
+          <p>Otonom İnsansız Hava Araçları (İHA) geliştirme süreçlerinde yer alıyorum. Görev odaklı otonom sistem tasarımları, teknik rapor hazırlığı ve simülasyon testleri üzerine çalışıyorum.</p>
         </div>
-    </section>
+      </div>
 
-    <!-- Fotoğraflar Bölümü -->
-    <section id="fotograflar" class="content-section">
-        <h2 class="section-title">Fotoğraflar</h2>
-        <div class="gallery">
-            <div class="gallery-item">
-                <img src="resim1.jpg" alt="Fotoğraf 1" onerror="foto1.png">
-            </div>
-            <div class="gallery-item">
-                <img src="resim2.jpg" alt="Fotoğraf 2" onerror="foto2.png">
-            </div>
-            <div class="gallery-item">
-                <img src="resim3.jpg" alt="Fotoğraf 3" onerror="this.src='https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?q=80&w=600'">
-            </div>
+      <div class="timeline-entry">
+        <div class="t-year">2025 - 2026</div>
+        <div class="t-card">
+          <h3>Otonom Sistemler &amp; Gömülü Yazılım</h3>
+          <p>Pixhawk uçuş kontrol kartları ve Ardupilot ekosistemi üzerine pratik çalışmalar gerçekleştirdim. Çeşitli sensör entegrasyonları ve İHA kalibrasyonları yaptım.</p>
         </div>
-    </section>
+      </div>
 
-    <!-- İletişim Bölümü -->
-    <section id="iletisim" class="content-section">
-        <h2 class="section-title">İletişim</h2>
-        <div class="contact-links">
-            <a href="https://github.com/eymenguntepe" target="_blank" class="contact-btn github">
-                <i class="fa-brands fa-github"></i> GitHub'da Takip Et
-            </a>
-            <a href="mailto:eymenguntepe@gmail.com" class="contact-btn email">
-                <i class="fa-solid fa-envelope"></i> E-Posta Gönder
-            </a>
-            <a href="https://linkedin.com/in/eymenguntepe" target="_blank" class="contact-btn linkedin">
-    <i class="fa-brands fa-linkedin"></i> LinkedIn'de Bağlantı Kur
-</a>
+      <div class="timeline-entry">
+        <div class="t-year">2024</div>
+        <div class="t-card">
+          <h3>Robotik Kodlama ve Algoritmalar</h3>
+          <p>Arduino tabanlı gömülü sistemler, temel kontrol döngüleri (PID) ve çizgi takip eden otonom robot mimarileri geliştirdim.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Eymen Güntepe. Tüm Hakları Saklıdır.</p>
-    </footer>
+  <section id="yetenekler">
+    <div class="section-heading">
+      <span class="section-index">04</span>
+      <h2>Teknik Yetkinlikler</h2>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-bar">
+        <div class="skill-top"><span>Ardupilot &amp; Pixhawk Entegrasyonu</span><span class="skill-pct">90%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:90%"></div></div>
+      </div>
+
+      <div class="skill-bar">
+        <div class="skill-top"><span>Otonom Görev &amp; İHA Uçuş Sistemleri</span><span class="skill-pct">85%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:85%"></div></div>
+      </div>
+
+      <div class="skill-bar">
+        <div class="skill-top"><span>YOLO11s &amp; Nesne Algılama (Bilgisayarlı Görü)</span><span class="skill-pct">75%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:75%"></div></div>
+      </div>
+
+      <div class="skill-bar">
+        <div class="skill-top"><span>Gömülü Sistemler (C++ / Arduino)</span><span class="skill-pct">80%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:80%"></div></div>
+      </div>
+
+      <div class="skill-bar">
+        <div class="skill-top"><span>HTML &amp; CSS (Web Arayüz Tasarımı)</span><span class="skill-pct">70%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:70%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fotograflar">
+    <div class="section-heading">
+      <span class="section-index">05</span>
+      <h2>Fotoğraflar</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="resim1.jpg" alt="Teknik Çalışma 1" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600'">
+      </div>
+      <div class="gallery-item">
+        <img src="resim2.jpg" alt="Teknik Çalışma 2" onerror="this.src='https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=600'">
+      </div>
+      <div class="gallery-item">
+        <img src="resim3.jpg" alt="Teknik Çalışma 3" onerror="this.src='https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?q=80&w=600'">
+      </div>
+    </div>
+  </section>
+
+  <section id="iletisim">
+    <div class="section-heading">
+      <span class="section-index">06</span>
+      <h2>İletişim Doneleri</h2>
+    </div>
+
+    <div class="contact-legend">
+      <a href="https://linkedin.com/in/eymenguntepe/" class="contact-item" target="_blank" rel="noopener">
+        <span class="contact-key"><i class="fa-brands fa-linkedin"></i> LINKEDIN</span>
+        <span class="contact-val">linkedin.com/in/eymenguntepe</span>
+      </a>
+      <a href="https://github.com/eymenguntepe" class="contact-item" target="_blank" rel="noopener">
+        <span class="contact-key"><i class="fa-brands fa-github"></i> GITHUB</span>
+        <span class="contact-val">github.com/eymenguntepe</span>
+      </a>
+      <a href="mailto:[email protected]" class="contact-item">
+        <span class="contact-key"><i class="fa-solid fa-envelope"></i> E-POSTA</span>
+        <span class="contact-val">eymen@ornek.com</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>© 2026 Eymen Güntepe — Bu taslak HTML &amp; CSS ile derlenmiştir.</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll("main > section");
+  sections.forEach((s) => s.classList.add("reveal"));
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+  sections.forEach((s) => observer.observe(s));
+});
+</script>
 
 </body>
 </html>
