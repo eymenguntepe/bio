@@ -3,328 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eymen Güntepe | Kişisel Web Sitesi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Eymen Güntepe | Kişisel Biyografi</title>
+    <!-- Google Fonts & FontAwesome İkonları -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* Genel Ayarlar */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: #0f172a;
-            color: #f8fafc;
-            overflow-x: hidden;
-        }
-
-        /* Arka Plan Müzik Çalar Alanı */
-        .audio-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(30, 41, 59, 0.7);
-            padding: 10px 15px;
-            border-radius: 30px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .audio-container audio {
-            height: 30px;
-            width: 200px;
-        }
-
-        /* Giriş (Hero) Bölümü */
-        #home {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
-            padding: 20px;
-        }
-
-        #home h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #38bdf8, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        #home p {
-            font-size: 1.2rem;
-            color: #94a3b8;
-            max-width: 600px;
-            margin-bottom: 30px;
-        }
-
-        /* Hızlı Menü Butonları */
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 12px 28px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #38bdf8, #4f46e5);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
-        }
-
-        /* Sayfa Bölümleri */
-        section {
-            padding: 80px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 2.2rem;
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-            color: #f1f5f9;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 4px;
-            background: #38bdf8;
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
-
-        /* Hakkımda */
-        .about-content {
-            background: #1e293b;
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
-            line-height: 1.8;
-            color: #cbd5e1;
-            font-size: 1.1rem;
-        }
-
-        /* Deneyim */
-        .timeline {
-            position: relative;
-            border-left: 2px solid #38bdf8;
-            padding-left: 20px;
-            margin-left: 10px;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 40px;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -27px;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #38bdf8;
-            border: 2px solid #0f172a;
-        }
-
-        .timeline-date {
-            font-size: 0.9rem;
-            color: #38bdf8;
-            font-weight: 600;
-        }
-
-        .timeline-title {
-            font-size: 1.3rem;
-            margin: 5px 0;
-            color: #f1f5f9;
-        }
-
-        .timeline-desc {
-            color: #94a3b8;
-        }
-
-        /* Fotoğraflar (Galeri) */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .gallery-item {
-            overflow: hidden;
-            border-radius: 15px;
-            height: 250px;
-            background: #1e293b;
-            border: 1px solid rgba(255,255,255,0.05);
-            position: relative;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        /* İletişim */
-        .contact-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .contact-card {
-            background: #1e293b;
-            padding: 25px 40px;
-            border-radius: 15px;
-            text-align: center;
-            min-width: 200px;
-            text-decoration: none;
-            color: #f1f5f9;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s ease;
-        }
-
-        .contact-card i {
-            font-size: 2rem;
-            color: #38bdf8;
-            margin-bottom: 15px;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-5px);
-            border-color: #38bdf8;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: #64748b;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        /* Mobil Uyumluluk */
-        @media (max-width: 768px) {
-            #home h1 { font-size: 2.5rem; }
-            .audio-container { top: auto; bottom: 20px; right: 20px; }
-        }
-    </style>
+    <!-- Harici CSS Dosyamız -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="audio-container">
-        <span style="font-size: 0.8rem; color: #94a3b8;"><i class="fa-solid fa-music"></i> Müzik:</span>
+    <!-- Arka Plan Müzik Çalar -->
+    <div class="music-player">
+        <div class="music-info">
+            <i class="fa-solid fa-music class-pulse"></i>
+            <span>Arka Plan Müziği</span>
+        </div>
         <audio controls loop>
             <source src="muzik.mp3" type="audio/mpeg">
-            Tarayıcınız müzik çaları desteklemiyor.
         </audio>
     </div>
 
-    <section id="home">
-        <h1>Eymen Güntepe</h1>
-        <p>Şehit Öğretmen Necmeddin Kuyucu Anadolu Lisesi 11. Sınıf Öğrencisi</p>
-        
-        <div class="hero-buttons">
-            <a href="#about" class="btn btn-primary">Hakkımda</a>
-            <a href="#experience" class="btn btn-primary">Deneyim</a>
-            <a href="#gallery" class="btn btn-primary">Fotoğraflar</a>
-            <a href="#contact" class="btn btn-primary">İletişim</a>
+    <!-- Giriş (Hero) Bölümü -->
+    <section id="giris" class="hero-section">
+        <div class="hero-container">
+            <div class="badge">11. Sınıf Öğrencisi</div>
+            <h1>Eymen Güntepe</h1>
+            <p class="school-text">Şehit Öğretmen Necmeddin Kuyucu Anadolu Lisesi</p>
+            
+            <!-- Butonlar -->
+            <div class="button-group">
+                <a href="#hakkimda" class="custom-btn btn-glow">Hakkımda</a>
+                <a href="#cv" class="custom-btn btn-glow cv-highlight-btn"><i class="fa-solid fa-file-pdf"></i> CV / Özgeçmiş</a>
+                <a href="#deneyim" class="custom-btn btn-glow">Deneyim</a>
+                <a href="#fotograflar" class="custom-btn btn-glow">Fotoğraflar</a>
+                <a href="#iletisim" class="custom-btn btn-glow">İletişim</a>
+            </div>
         </div>
     </section>
 
-    <section id="about">
+    <!-- Hakkımda Bölümü -->
+    <section id="hakkimda" class="content-section">
         <h2 class="section-title">Hakkımda</h2>
-        <div class="about-content">
-            <p>Merhaba! Ben Eymen Güntepe. Şehit Öğretmen Necmeddin Kuyucu Anadolu Lisesi'nde 11. sınıf öğrencisiyim. Teknolojiyi yakından takip ediyor, kendimi yazılım, robotik kodlama ve teknolojik projeler alanında geliştirmeyi hedefliyorum. Geleceğin dünyasını şekillendiren projelerin bir parçası olmak için çalışıyorum.</p>
+        <div class="card about-card">
+            <p>Merhaba! Ben <strong>Eymen Güntepe</strong>. Şehit Öğretmen Necmeddin Kuyucu Anadolu Lisesi'nde 11. sınıf öğrencisiyim. Teknolojiye, yazılıma ve dijital tasarıma büyük bir ilgi duyuyorum. Kendimi bu alanlarda geliştirmek ve geleceğe yönelik başarılı projeler üretmek için çalışıyorum. Web geliştirme ve GitHub gibi platformları öğrenerek teknoloji dünyasındaki adımlarımı hızlandırıyorum.</p>
         </div>
     </section>
 
-    <section id="experience">
-        <h2 class="section-title">Deneyim & Projeler</h2>
+    <!-- YENİ: CV / Özgeçmiş Bölümü -->
+    <section id="cv" class="content-section">
+        <h2 class="section-title">Özgeçmiş (CV)</h2>
+        <div class="cv-container">
+            <div class="cv-info-card">
+                <div class="cv-icon">
+                    <i class="fa-regular fa-file-pdf"></i>
+                </div>
+                <div class="cv-text">
+                    <h3>Akademik ve Teknik Özgeçmiş</h3>
+                    <p>Eğitim hayatım, katıldığım projeler, teknik yetkinliklerim ve ilgi alanlarımın yer aldığı güncel CV'me aşağıdan ulaşabilirsiniz.</p>
+                </div>
+                <!-- "cv.pdf" dosyasını projenin ana klasörüne yüklemeyi unutma -->
+                <a href="cv.pdf" target="_blank" class="cv-download-btn">
+                    <i class="fa-solid fa-download"></i> CV'yi İndir / Görüntüle
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deneyim Bölümü -->
+    <section id="deneyim" class="content-section">
+        <h2 class="section-title">Deneyim</h2>
         <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-date">2026 - Günümüz</div>
-                <h3 class="timeline-title">ModülX Takımı Üyesi</h3>
-                <p class="timeline-desc">Takım arkadaşlarımla birlikte insansız hava araçları (İHA), otonom sistemler ve bilgisayarlı görü (YOLO, QR kod okuma) üzerine projeler ve teknik raporlar geliştiriyorum.</p>
+            <div class="timeline-box">
+                <span class="date">2025 - 2026</span>
+                <h3>Web Geliştirme & Tasarım</h3>
+                <p>HTML, CSS ve temel web technologies üzerine çalışmalar yapmaya başladım. Kendi projelerimi geliştirmek için GitHub platformunu aktif olarak kullanıyorum.</p>
             </div>
-            <div class="timeline-item">
-                <div class="timeline-date">2025 - 2026</div>
-                <h3 class="timeline-title">Robotik Kodlama ve Geliştirme</h3>
-                <p class="timeline-desc">Arduino, Pixhawk ve Ardupilot tabanlı gömülü sistemler üzerine çalışmalar yaptım. PID kontrollü sistemler geliştirdim.</p>
+            <div class="timeline-box">
+                <span class="date">Gelecek Hedefleri</span>
+                <h3>Yazılım ve Yapay Zeka</h3>
+                <p>Lise eğitimime devam ederken bir yandan da algoritma mantığı, Python programlama ve modern arayüz tasarımları üzerine kendimi geliştirmeyi hedefliyorum.</p>
             </div>
         </div>
     </section>
 
-    <section id="gallery">
+    <!-- Fotoğraflar Bölümü -->
+    <section id="fotograflar" class="content-section">
         <h2 class="section-title">Fotoğraflar</h2>
-        <div class="gallery-grid">
+        <div class="gallery">
             <div class="gallery-item">
-                <img src="resim1.jpg" alt="Proje Çalışmaları" onerror="this.src='https://via.placeholder.com/400x300/1e293b/fff?text=Proje+Fotoğrafı'">
+                <img src="resim1.jpg" alt="Fotoğraf 1" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600'">
             </div>
             <div class="gallery-item">
-                <img src="resim2.jpg" alt="Takım Çalışması" onerror="this.src='https://via.placeholder.com/400x300/1e293b/fff?text=Takım+Fotoğrafı'">
+                <img src="resim2.jpg" alt="Fotoğraf 2" onerror="this.src='https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=600'">
             </div>
             <div class="gallery-item">
-                <img src="resim3.jpg" alt="Okul / Sosyal" onerror="this.src='https://via.placeholder.com/400x300/1e293b/fff?text=Sosyal+Etkinlik'">
+                <img src="resim3.jpg" alt="Fotoğraf 3" onerror="this.src='https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?q=80&w=600'">
             </div>
         </div>
     </section>
 
-    <section id="contact">
+    <!-- İletişim Bölümü -->
+    <section id="iletisim" class="content-section">
         <h2 class="section-title">İletişim</h2>
-        <div class="contact-container">
-            <a href="https://github.com/eymenguntepe" target="_blank" class="contact-card">
-                <i class="fa-brands fa-github"></i>
-                <h3>GitHub</h3>
+        <div class="contact-links">
+            <a href="https://github.com/eymenguntepe" target="_blank" class="contact-btn github">
+                <i class="fa-brands fa-github"></i> GitHub'da Takip Et
             </a>
-            <a href="mailto:eymen@ornek.com" class="contact-card">
-                <i class="fa-solid fa-envelope"></i>
-                <h3>E-posta</h3>
+            <a href="mailto:eymen@ornek.com" class="contact-btn email">
+                <i class="fa-solid fa-envelope"></i> E-Posta Gönder
             </a>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Eymen Güntepe. Tüm Hakları Saklıdır.</p>
     </footer>
