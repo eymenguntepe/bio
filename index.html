@@ -7,15 +7,270 @@
     <!-- Google Fonts & FontAwesome İkonları -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Harici CSS Dosyamız -->
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- CSS KODLARINI DOĞRUDAN BURAYA GÖMDÜK (BAĞLANTI HATASI İHTİMALİ SIFIR) -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f19;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .badge {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Arka Plan Müzik Çalar */
+        .music-player {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 20px;
+            border-radius: 50px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .music-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #38bdf8;
+        }
+
+        .music-player audio {
+            height: 28px;
+            width: 220px;
+        }
+
+        /* Giriş (Hero) Ekranı */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at top right, #1e1b4b 0%, #0b0f19 70%);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .badge {
+            background: linear-gradient(90deg, #4f46e5, #06b6d4);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .hero-container h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 40%, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .school-text {
+            font-size: 1.3rem;
+            color: #38bdf8;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        /* Buton Tasarımları */
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .custom-btn {
+            text-decoration: none;
+            color: #fff;
+            padding: 14px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn-glow:hover {
+            background: #ffffff;
+            color: #0b0f19;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
+            border-color: #fff;
+        }
+
+        .cv-highlight-btn {
+            border-color: rgba(56, 189, 248, 0.4) !important;
+            background: rgba(56, 189, 248, 0.05) !important;
+        }
+
+        .cv-highlight-btn:hover {
+            background: #38bdf8 !important;
+            color: #0b0f19 !important;
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.4) !important;
+            border-color: #38bdf8 !important;
+        }
+
+        /* İçerik Bölümleri */
+        .content-section {
+            padding: 100px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            color: #fff;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #38bdf8, #4f46e5);
+            border-radius: 2px;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 24px;
+            line-height: 1.8;
+            font-size: 1.15rem;
+            color: #cbd5e1;
+        }
+
+        .card strong { color: #fff; }
+
+        /* CV Kart Alanı */
+        .cv-info-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.8) 100%);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            padding: 40px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .cv-icon {
+            font-size: 3.5rem;
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
+            width: 90px;
+            height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+        }
+
+        .cv-text { flex: 1; min-width: 250px; }
+        .cv-text h3 { font-size: 1.5rem; color: #fff; margin-bottom: 8px; }
+        .cv-text p { color: #94a3b8; line-height: 1.6; }
+
+        .cv-download-btn {
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(135deg, #38bdf8, #4f46e5);
+            padding: 16px 32px;
+            border-radius: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cv-download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Deneyim Zaman Çizelgesi */
+        .timeline { display: flex; flex-direction: column; gap: 30px; }
+        .timeline-box {
+            background: rgba(30, 41, 59, 0.25);
+            border-left: 4px solid #38bdf8;
+            padding: 25px 30px;
+            border-radius: 0 20px 20px 0;
+            border-top: 1px solid rgba(255,255,255,0.02);
+            border-right: 1px solid rgba(255,255,255,0.02);
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+        }
+        .timeline-box .date { font-size: 0.9rem; color: #38bdf8; font-weight: 700; }
+        .timeline-box h3 { margin: 8px 0; font-size: 1.4rem; color: #fff; }
+
+        /* Fotoğraf Galerisi */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        .gallery-item { border-radius: 20px; overflow: hidden; height: 250px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+        .gallery-item:hover img { transform: scale(1.08); }
+
+        /* İletişim Butonları */
+        .contact-links { display: flex; gap: 20px; flex-wrap: wrap; }
+        .contact-btn {
+            text-decoration: none; padding: 18px 35px; border-radius: 16px; font-weight: 700;
+            display: flex; align-items: center; gap: 12px; font-size: 1.1rem; color: #fff; transition: all 0.3s ease;
+        }
+        .github { background: #24292e; box-shadow: 0 10px 20px rgba(36, 41, 46, 0.3); }
+        .email { background: #0284c7; box-shadow: 0 10px 20px rgba(2, 132, 199, 0.3); }
+        .contact-btn:hover { transform: translateY(-4px); box-shadow: 0 15px 25px rgba(0,0,0,0.4); }
+
+        footer { text-align: center; padding: 50px 20px; color: #64748b; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.95rem; }
+
+        @media (max-width: 768px) {
+            .hero-container h1 { font-size: 2.8rem; }
+            .school-text { font-size: 1.1rem; }
+            .cv-info-card { text-align: center; justify-content: center; flex-direction: column; padding: 30px 20px; }
+            .cv-download-btn { width: 100%; justify-content: center; }
+            .music-player { bottom: 15px; right: 15px; left: 15px; width: calc(100% - 30px); border-radius: 20px; }
+            .music-player audio { width: 100%; }
+        }
+    </style>
 </head>
 <body>
 
     <!-- Arka Plan Müzik Çalar -->
     <div class="music-player">
         <div class="music-info">
-            <i class="fa-solid fa-music class-pulse"></i>
+            <i class="fa-solid fa-music"></i>
             <span>Arka Plan Müziği</span>
         </div>
         <audio controls loop>
@@ -30,7 +285,6 @@
             <h1>Eymen Güntepe</h1>
             <p class="school-text">Şehit Öğretmen Necmeddin Kuyucu Anadolu Lisesi</p>
             
-            <!-- Butonlar -->
             <div class="button-group">
                 <a href="#hakkimda" class="custom-btn btn-glow">Hakkımda</a>
                 <a href="#cv" class="custom-btn btn-glow cv-highlight-btn"><i class="fa-solid fa-file-pdf"></i> CV / Özgeçmiş</a>
@@ -49,23 +303,20 @@
         </div>
     </section>
 
-    <!-- YENİ: CV / Özgeçmiş Bölümü -->
+    <!-- CV Bölümü -->
     <section id="cv" class="content-section">
         <h2 class="section-title">Özgeçmiş (CV)</h2>
-        <div class="cv-container">
-            <div class="cv-info-card">
-                <div class="cv-icon">
-                    <i class="fa-regular fa-file-pdf"></i>
-                </div>
-                <div class="cv-text">
-                    <h3>Akademik ve Teknik Özgeçmiş</h3>
-                    <p>Eğitim hayatım, katıldığım projeler, teknik yetkinliklerim ve ilgi alanlarımın yer aldığı güncel CV'me aşağıdan ulaşabilirsiniz.</p>
-                </div>
-                <!-- "cv.pdf" dosyasını projenin ana klasörüne yüklemeyi unutma -->
-                <a href="cv.pdf" target="_blank" class="cv-download-btn">
-                    <i class="fa-solid fa-download"></i> CV'yi İndir / Görüntüle
-                </a>
+        <div class="cv-info-card">
+            <div class="cv-icon">
+                <i class="fa-regular fa-file-pdf"></i>
             </div>
+            <div class="cv-text">
+                <h3>Akademik ve Teknik Özgeçmiş</h3>
+                <p>Eğitim hayatım, katıldığım projeler, teknik yetkinliklerim ve ilgi alanlarımın yer aldığı güncel CV'me aşağıdan ulaşabilirsiniz.</p>
+            </div>
+            <a href="cv.pdf" target="_blank" class="cv-download-btn">
+                <i class="fa-solid fa-download"></i> CV'yi İndir / Görüntüle
+            </a>
         </div>
     </section>
 
@@ -76,7 +327,7 @@
             <div class="timeline-box">
                 <span class="date">2025 - 2026</span>
                 <h3>Web Geliştirme & Tasarım</h3>
-                <p>HTML, CSS ve temel web technologies üzerine çalışmalar yapmaya başladım. Kendi projelerimi geliştirmek için GitHub platformunu aktif olarak kullanıyorum.</p>
+                <p>HTML, CSS ve temel web teknolojileri üzerine çalışmalar yapmaya başladım. Kendi projelerimi geliştirmek için GitHub platformunu aktif olarak kullanıyorum.</p>
             </div>
             <div class="timeline-box">
                 <span class="date">Gelecek Hedefleri</span>
